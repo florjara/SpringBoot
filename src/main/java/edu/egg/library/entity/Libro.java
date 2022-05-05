@@ -7,10 +7,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 @Entity
+@Table(indexes = {@Index(name = "idx_libro_titulo", columnList = "libro_titulo")})
 public class Libro implements Serializable {
 
     @Id
