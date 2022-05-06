@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://thymeleaf.org">
+  <head th:replace="fragments/head::head"></head>
+  <header th:replace="fragments/header::header"></header>
+  <body>
+    <main>
+      <div class="container">
+        <div class="col">
+          <div class="row mt-5">
+            <table class="table table-hover table-bordered">
+              <thead>
+                <tr class="table-dark">
+                  <th>ID</th>
+                  <th>Nombre</th>
+                </tr>
+              </thead>
+              <tbody>
+                <!--Provisorio || modificar tambien el controlador de autor-->
+                <tr th:each="editorial : ${editoriales}">
+                  <td th:text="${editorial.id}"></td>
+                  <td th:text="${editorial.nombre}"></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <a class="btn btn-primary" th:href="@{/editorial/form}">Crear Editorial</a>
+      <a class="btn btn-primary" th:href="@{/autor/form}">Crear Autor</a>
+    </main>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+  </body>
+</html>

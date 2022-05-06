@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://thymeleaf.org">
+  <head th:replace="fragments/head::head"></head>
+  <header th:replace="fragments/header::header"></header>
+
+  <body>
+    <main>
+      <div>
+        <div>
+          <div>
+            <form
+              th:action="@{/libro/crear-libro}"
+              method="post"
+              th:object="${libro}"
+            >
+              <legend>Crear libro</legend>
+
+              <label for="isbn">ISBN</label>
+              <input type="number" id="isbn" th:field="*{isbn}" />
+              <label for="titulo">Título</label>
+              <input type="text" id="titulo" th:field="*{titulo}" />
+              <label for="anioo">Año de publicación</label>
+            <input type="number" id="anioo" th:field="*{anio}" />
+              <label for="ejemp">Cantidad de Ejemplares</label>
+              <input type="number" id="ejemp" th:field="*{ejemplares}" />
+
+              <select name="autor" id="autor" th:field="*{autor}">
+                <option selected value="">Autor</option>
+                <option
+                  th:each="autor : ${autores}"
+                  th:text="${autor.nombre}"
+                  th:value="${autor.id}"
+                ></option>
+              </select>
+
+              <select name="editorial" id="editorial" th:field="*{editorial}">
+                <option selected value="">Editoriales</option>
+                <option
+                  th:each="editorial : ${editoriales}"
+                  th:text="${editorial.nombre}"
+                  th:value="${editorial.id}"
+                ></option>
+              </select>
+              <!--hacer el select de editorial y autor-->
+              <button type="submit" class="btn btn-primary">Crear</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

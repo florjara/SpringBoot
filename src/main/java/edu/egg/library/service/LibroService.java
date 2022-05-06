@@ -11,27 +11,31 @@ import org.springframework.transaction.annotation.Transactional;
 public class LibroService {
 
     @Autowired
-    private LibroRepository repository;
+    private LibroRepository libroRepository;
+
 
     @Transactional
     public void crearLibro(Libro libroDto) {
         Libro libro = new Libro();
 
+        Short s = 0; //como lo meto parametro 
         libro.setTitulo(libroDto.getTitulo());
         libro.setIsbn(libroDto.getIsbn());
-        libro.setEjemplaresPrestados(libroDto.getEjemplaresPrestados());
-        libro.setEjemplaresRestantes(libroDto.getEjemplaresRestantes());
+        libro.setEjemplaresPrestados(s);
+        libro.setEjemplaresRestantes(s);
         libro.setEjemplares(libroDto.getEjemplares());
         libro.setAnio(libroDto.getAnio());
         libro.setAlta(true);
-
-        repository.save(libro);
+        libro.setEditorial(libroDto.getEditorial());
+        libro.setAutor(libroDto.getAutor());
+        
+        libroRepository.save(libro);
     }
 
     @Transactional
     public void modificarLibro(Libro libroDto) {
-        Libro libro = repository.getById(libroDto.getId());
-        
+        Libro libro = libroRepository.getById(libroDto.getId());
+
         libro.setTitulo(libroDto.getTitulo());
         libro.setIsbn(libroDto.getIsbn());
         libro.setEjemplaresPrestados(libroDto.getEjemplaresPrestados());
@@ -40,22 +44,22 @@ public class LibroService {
         libro.setAnio(libroDto.getAnio());
 
         // que onda el autor y la editorial
-        repository.save(libro);
+        libroRepository.save(libro);
     }
 
     @Transactional(readOnly = true)
     public List<Libro> obtenerLibros() {
-        return repository.findAll();
+        return libroRepository.findAll();
     }
 
     @Transactional(readOnly = true)
     public Libro obtenerLibroPorId(Long id) {
-        return repository.getById(id);
+        return libroRepository.getById(id);
     }
 
     @Transactional
     public void eliminarLibroPorId(Long id) {
-        repository.deleteById(id);
+        libroRepository.deleteById(id);
     }
 
 }

@@ -1,5 +1,23 @@
 package edu.egg.library.controller;
 
+import edu.egg.library.service.EditorialService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller
+@RequestMapping("/editorial")
 public class EditorialController {
     
+    @Autowired
+    private EditorialService editorialService;
+    
+    @GetMapping
+    public ModelAndView obtenerEditoriales(){
+        ModelAndView mav = new ModelAndView("tabla-edit-autor");
+        mav.addObject("editoriales", editorialService.obtenerEditoriales());
+        return mav;
+    }
 }

@@ -40,7 +40,7 @@ public class Libro implements Serializable {
     private boolean alta;
 
     @Column(name = "libro_anio", columnDefinition = "year", nullable = false)
-    private short anio;
+    private Short anio;
 
     @ManyToOne(fetch = FetchType.LAZY) //Eager -> carga ansiosa, es decir, estos datos se cargan al consultar
     @JoinColumn(name = "libro_autor", referencedColumnName = "autor_id")
@@ -74,11 +74,11 @@ public class Libro implements Serializable {
         this.id = id;
     }
 
-    public short getAnio() {
+    public Short getAnio() {
         return anio;
     }
 
-    public void setAnio(short anio) {
+    public void setAnio(Short anio) {
         this.anio = anio;
     }
 
