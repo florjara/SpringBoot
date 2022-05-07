@@ -9,12 +9,14 @@
           <div class="row mt-5">
             <table class="table table-hover table-bordered">
               <thead>
-                <tr class="table-dark ">
+                <tr class="table-dark">
                   <th>ISBN</th>
                   <th>Título</th>
                   <th>Autor</th>
                   <th>Editorial</th>
                   <th>Ejemplares</th>
+                  <th></th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -24,13 +26,27 @@
                   <td th:text="${libro.autor.nombre}"></td>
                   <td th:text="${libro.editorial.nombre}"></td>
                   <td th:text="${libro.ejemplares}"></td>
+                  <td>
+                    <a
+                      th:href="@{/libro/form-actualizar-libro/__${libro.id}__}"
+                      class="btn btn-warning"
+                      >Actualizar</a
+                    >
+                  </td>
+                  <td>
+                    <a
+                      th:href="@{/libro/eliminar-libro/__${libro.id}__}"
+                      class="btn btn-danger"
+                      >Eliminar</a
+                    >
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
-      <a class="btn btn-primary" th:href="@{/libro/form}">Crear Libro</a>
+      <a class="btn btn-primary" th:href="@{/libro/form-crear-libro}">Crear Libro</a>
     </main>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
   </body>

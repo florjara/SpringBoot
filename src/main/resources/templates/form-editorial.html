@@ -7,13 +7,13 @@
       <div>
           <div>
               <div>
-                 <form th:action="@{/autor/crear-autor}" method="post" th:object="${autor}">
-                    <legend>Crear Autor</legend>
-
+                 <form th:action="@{/editorial/__${action}__}" method="post" th:object="${editorial}">
+                    <legend>Editorial</legend>
+                    <input type="hidden" th:field="*{id}">
                     <label for="nombre">Nombre del autor</label>
                     <input type="text" id="nombre" th:field="*{nombre}">
 
-                    <button type="submit" class="btn btn-primary">Crear</button>
+                    <button type="submit" class="btn btn-primary" th:text="${action == 'crear-editorial' ? 'Crear' : 'Actualizar'}"></button>
                  </form>
               </div>
           </div>

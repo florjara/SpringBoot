@@ -24,7 +24,7 @@ public class AutorService {
     }
 
     @Transactional
-    public void modificarAutor(Autor autorDto) {
+    public void actualizarAutor(Autor autorDto) {
         Autor autor = repository.getById(autorDto.getId());
         autor.setNombre(autorDto.getNombre());
         repository.save(autor);

@@ -33,17 +33,18 @@ public class LibroService {
     }
 
     @Transactional
-    public void modificarLibro(Libro libroDto) {
+    public void actualizarLibro(Libro libroDto) {
         Libro libro = libroRepository.getById(libroDto.getId());
 
         libro.setTitulo(libroDto.getTitulo());
         libro.setIsbn(libroDto.getIsbn());
-        libro.setEjemplaresPrestados(libroDto.getEjemplaresPrestados());
-        libro.setEjemplaresRestantes(libroDto.getEjemplaresRestantes());
+//        libro.setEjemplaresPrestados(libroDto.getEjemplaresPrestados());
+//        libro.setEjemplaresRestantes(libroDto.getEjemplaresRestantes());
         libro.setEjemplares(libroDto.getEjemplares());
         libro.setAnio(libroDto.getAnio());
+        libro.setAutor(libroDto.getAutor());
+        libro.setEditorial(libroDto.getEditorial());
 
-        // que onda el autor y la editorial
         libroRepository.save(libro);
     }
 

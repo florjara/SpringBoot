@@ -24,7 +24,7 @@ public class EditorialService {
     }
 
     @Transactional
-    public void modificarEditorial(Editorial editorialDto) {
+    public void actualizarEditorial(Editorial editorialDto) {
         Editorial editorial = repository.getById(editorialDto.getId());
         editorial.setNombre(editorialDto.getNombre());
         repository.save(editorial);

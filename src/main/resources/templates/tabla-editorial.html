@@ -12,21 +12,37 @@
                 <tr class="table-dark">
                   <th>ID</th>
                   <th>Nombre</th>
+                  <th></th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
-                <!--Provisorio || modificar tambien el controlador de autor-->
                 <tr th:each="editorial : ${editoriales}">
                   <td th:text="${editorial.id}"></td>
                   <td th:text="${editorial.nombre}"></td>
+                  <td>
+                    <a
+                      th:href="@{/editorial/form/__${editorial.id}__}"
+                      class="btn btn-warning"
+                      >Actualizar</a
+                    >
+                  </td>
+                  <td>
+                    <a
+                      th:href="@{/editorial/eliminar-editorial/__${editorial.id}__}"
+                      class="btn btn-danger"
+                      >Eliminar</a
+                    >
+                  </td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
       </div>
-      <a class="btn btn-primary" th:href="@{/editorial/form}">Crear Editorial</a>
-      <a class="btn btn-primary" th:href="@{/autor/form}">Crear Autor</a>
+      <a class="btn btn-primary" th:href="@{/editorial/form}"
+        >Crear Editorial</a
+      >
     </main>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
   </body>

@@ -9,18 +9,21 @@
         <div>
           <div>
             <form
-              th:action="@{/libro/crear-libro}"
+              th:action="@{/libro/__${action}__}"
               method="post"
               th:object="${libro}"
             >
-              <legend>Crear libro</legend>
-
+              <legend>Crear o actualizar libro we</legend>
+            <input type="hidden" th:field="*{id}">
+            <input type="hidden" th:field="*{ejemplaresPrestados}">
+            <input type="hidden" th:field="*{ejemplaresRestantes}">
+            <!--porque no tengo que enviar el boolean?-->
               <label for="isbn">ISBN</label>
               <input type="number" id="isbn" th:field="*{isbn}" />
               <label for="titulo">Título</label>
               <input type="text" id="titulo" th:field="*{titulo}" />
               <label for="anioo">Año de publicación</label>
-            <input type="number" id="anioo" th:field="*{anio}" />
+              <input type="number" id="anioo" th:field="*{anio}" />
               <label for="ejemp">Cantidad de Ejemplares</label>
               <input type="number" id="ejemp" th:field="*{ejemplares}" />
 
@@ -41,8 +44,12 @@
                   th:value="${editorial.id}"
                 ></option>
               </select>
-              <!--hacer el select de editorial y autor-->
-              <button type="submit" class="btn btn-primary">Crear</button>
+
+              <button
+                type="submit"
+                th:text="${action == 'crear-libro' ? 'Crear' : 'Actualizar'}"
+                class="btn btn-primary"
+              ></button>
             </form>
           </div>
         </div>
