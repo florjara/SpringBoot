@@ -15,6 +15,9 @@ public class EditorialService {
 
     @Transactional
     public void crearEditorial(Editorial editorialDto) {
+        if (validarNombre(editorialDto.getNombre())) {
+            throw new IllegalArgumentException("Esta editorial ya existe en la base de datos.");
+        }
         Editorial editorial = new Editorial();
 
         editorial.setNombre(editorialDto.getNombre());
@@ -23,9 +26,18 @@ public class EditorialService {
         repository.save(editorial);
     }
 
+    boolean validarNombre(String nombre) {
+        return repository.existsByNombre(nombre);
+    }
+
     @Transactional
     public void actualizarEditorial(Editorial editorialDto) {
         Editorial editorial = repository.getById(editorialDto.getId());
+        
+        if (validarNombre(editorialDto.getNombre()) && !editorialDto.getNombre().equals(editorial.getNombre())) {
+            throw new IllegalArgumentException("Esta editorial ya existe en la base de datos.");
+        }
+        
         editorial.setNombre(editorialDto.getNombre());
         repository.save(editorial);
     }

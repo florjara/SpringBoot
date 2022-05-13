@@ -15,6 +15,10 @@ public class AutorService {
 
     @Transactional
     public void crearAutor(Autor autorDto) {
+        if (validarNombre(autorDto.getNombre())) {
+            throw new IllegalArgumentException("Este autor ya existe en la base de datos.");
+        }
+
         Autor autor = new Autor();
 
         autor.setNombre(autorDto.getNombre());
@@ -23,9 +27,19 @@ public class AutorService {
         repository.save(autor);
     }
 
+    boolean validarNombre(String nombre) {
+        return repository.existsByNombre(nombre);
+    }
+
     @Transactional
     public void actualizarAutor(Autor autorDto) {
-        Autor autor = repository.getById(autorDto.getId());
+         Autor autor = repository.getById(autorDto.getId());
+         
+         if (validarNombre(autorDto.getNombre()) && !autorDto.getNombre().equals(autor.getNombre())) {
+            throw new IllegalArgumentException("Este autor ya existe en la base de datos.");
+        }
+        
+       
         autor.setNombre(autorDto.getNombre());
         repository.save(autor);
     }

@@ -4,19 +4,40 @@
   <header th:replace="fragments/header::header"></header>
 
   <body>
+    <main>
       <div>
+        <div>
+          <div
+            th:if="${exception}"
+            th:text="${exception}"
+            class="alert alert-danger"
+            role="alert"
+          ></div>
           <div>
-              <div>
-                 <form th:action="@{/autor/__${action}__}" method="post" th:object="${autor}">
-                    <legend> Autor</legend>
-                    <input type="hidden" th:field="*{id}">
-                    <label for="nombre">Nombre del autor</label>
-                    <input type="text" id="nombre" th:field="*{nombre}">
+            <form
+              th:action="@{/autor/__${action}__}"
+              method="post"
+              th:object="${autor}"
+              class="needs-validation"
+              novalidate
+            >
+              <legend>Autor</legend>
+              <input type="hidden" th:field="*{id}" />
+              <label for="nombre">Nombre del autor</label>
+              <input type="text" id="nombre" th:field="*{nombre}" required />
+              <div class="invalid-feedback">Este campo es obligatorio.</div>
 
-                    <button type="submit" class="btn btn-primary" th:text="${action == 'crear-libro' ? 'Crear' :'Actualizar'}"></button>
-                 </form>
-              </div>
+              <button
+                type="submit"
+                class="btn btn-primary"
+                th:text="${action == 'crear-libro' ? 'Crear' :'Actualizar'}"
+              ></button>
+            </form>
           </div>
+        </div>
       </div>
+    </main>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    <script th:src="@{/js/validation.js}"></script>
   </body>
-  </html>
+</html>

@@ -17,7 +17,10 @@ public class LibroService {
     @Transactional
     public void crearLibro(Libro libroDto) {
         Libro libro = new Libro();
-
+        if (validarAnio(libroDto.getAnio())) {
+            throw new IllegalArgumentException("El año de publicacion ingresado es invalido.");
+        }
+        
         Short s = 0; //como lo meto parametro 
         libro.setTitulo(libroDto.getTitulo());
         libro.setIsbn(libroDto.getIsbn());
@@ -32,10 +35,16 @@ public class LibroService {
         libroRepository.save(libro);
     }
 
+    private boolean validarAnio(Short anio){
+        return (anio<1901) || (anio>2155);
+    }
     @Transactional
     public void actualizarLibro(Libro libroDto) {
         Libro libro = libroRepository.getById(libroDto.getId());
-
+        if (validarAnio(libroDto.getAnio())) {
+            throw new IllegalArgumentException("El año de publicacion ingresado es invalido.");
+        }
+;
         libro.setTitulo(libroDto.getTitulo());
         libro.setIsbn(libroDto.getIsbn());
 //        libro.setEjemplaresPrestados(libroDto.getEjemplaresPrestados());
