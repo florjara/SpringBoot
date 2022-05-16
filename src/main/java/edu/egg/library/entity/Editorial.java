@@ -5,8 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 @Entity
+@SQLDelete(sql = "UPDATE editorial SET editorial_alta = FALSE WHERE editorial_id = ?") 
+//@Where(clause = "editorial_alta=TRUE")
 public class Editorial {
 
     @Id // al definirlo id es automaticamente no null ?

@@ -11,9 +11,14 @@ import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 
 @Entity
-@Table(indexes = {@Index(name = "idx_libro_titulo", columnList = "libro_titulo")})
+@SQLDelete(sql = "UPDATE libro SET libro_alta = false WHERE libro_id = ?") //Sobreescritura del metodo deleteById()
+@Where(clause = "libro_alta = true") //CONDICION para las consultas p. ej: findAll()
+@Table(indexes = {
+    @Index(name = "idx_libro_titulo", columnList = "libro_titulo")})
 public class Libro implements Serializable {
 
     @Id
@@ -24,7 +29,7 @@ public class Libro implements Serializable {
     @Column(name = "libro_isbn", nullable = false)
     private Long isbn;
 
-    @Column(name = "libro_titulo", length=60, nullable = false)
+    @Column(name = "libro_titulo", length = 60, nullable = false)
     private String titulo;
 
     @Column(name = "libro_ejemplares", nullable = false)
@@ -81,7 +86,6 @@ public class Libro implements Serializable {
     public void setAnio(Short anio) {
         this.anio = anio;
     }
-
 
     public Long getIsbn() {
         return isbn;
