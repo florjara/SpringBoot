@@ -7,7 +7,6 @@ import edu.egg.library.service.LibroService;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -61,7 +60,6 @@ public class LibroController {
     }
 
     @GetMapping("/form-actualizar-libro/{id}")
-    @PreAuthorize("hasRole('ADMIN')")
     public ModelAndView formActualizar(@PathVariable Long id, HttpServletRequest request) {
         ModelAndView mav = new ModelAndView("form-libro");
         mav.addObject("editoriales", editorialService.obtenerEditoriales());
@@ -110,7 +108,6 @@ public class LibroController {
         return redirect;
     }
 
-    @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/eliminar-libro/{id}")
     public RedirectView eliminarLibro(@PathVariable Long id, RedirectAttributes attributes) {
         RedirectView redirect = new RedirectView("/libro");
