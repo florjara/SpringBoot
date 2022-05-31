@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head th:replace="fragments/head::head"></head>
+  <header th:replace="fragments/header-all::header-all"></header>
+  <body>
+      <main>
+        <div class="">
+          <div>
+            <div>
+                <h3>Crear Rol</h3>
+              <form th:action="@{/role/create}" method="post" th:object="${role}">
+                <input type="text" placeholder="Ingrese Rol" th:field="*{name}" name="Rol">
+                <button type="submit" class="btn btn_primary">Crear</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </main>
+  </body>
+</html>
