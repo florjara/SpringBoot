@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head th:replace="fragments/head::head"></head>
+  <header th:replace="fragments/header-all::header-all"></header>
+  <body>
+      <main>
+        <div
+            th:if="${exception}"
+            th:text="${exception}"
+            class="alert alert-danger"
+            role="alert"
+          ></div>
+          <div>
+            <div>
+                <h3>Registro</h3>
+              <form th:action="@{/auth/register}" method="post" th:object="${user}">
+                <input type="hidden" th:field="*{id}" >
+                <input type="email" th:field="*{email}" placeholder="Email">
+                <input type="password" th:field="*{password}" placeholder="Contraseña">
+                <button type="submit" class="btn btn_primary">Registrar</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </main>
+  </body>
+</html>
